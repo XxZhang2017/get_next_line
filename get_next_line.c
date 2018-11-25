@@ -6,7 +6,7 @@
 /*   By: xinzhang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/04 17:26:10 by xinzhang          #+#    #+#             */
-/*   Updated: 2018/11/16 23:08:42 by xinzhang         ###   ########.fr       */
+/*   Updated: 2018/11/25 11:55:35 by xinzhang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int		buf_line(ssize_t *regbyte, char **line, char *buf, t_list **tp)
 	int		trace;
 	char	*help_line;
 
-	trace = search_newline(buf);
+	trace = ft_search(buf);
 	if (trace != -1)
 	{
 		help_line = *line;
 		*line = ft_strnjoin(*line, buf, trace);
 		free(help_line);
 		if (trace + 1 < *regbyte)
-			copy_to_tail(buf, trace + 1, tp);
+			ft_add_to_tail(buf, trace + 1, tp);
 		return (1);
 	}
 	help_line = *line;
@@ -40,8 +40,7 @@ int		get_node_data_to_line(t_list **t, char **line)
 	if (!(*t))
 		return (-1);
 	len = 0;
-	if (*line)
-		(**line) = '\0';
+	*line = NULL;
 	return (get_data_helper(t, line, len));
 }
 

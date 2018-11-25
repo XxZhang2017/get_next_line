@@ -6,16 +6,15 @@
 #    By: xinzhang <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/04 15:08:37 by xinzhang          #+#    #+#              #
-#    Updated: 2018/11/04 22:17:11 by xinzhang         ###   ########.fr        #
+#    Updated: 2018/11/25 11:24:09 by xinzhang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra \
 
-FILES = $(shell ls | grep -E "ft_.+\.c") get_last_node.c search_newline.c \
-		append_node.c copy_to_tail.c 
+FILES = $(shell ls | grep -E "ft_.+\.c")
 
 OBJ = $(FILES:%.c=%.o)
 
