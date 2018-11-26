@@ -31,4 +31,6 @@ t_list			*ft_get_last(t_list *t);
 t_list			*ft_append(t_list *t, char *buf);
 int				ft_search(char *a);
 char			*ft_strndup(char *c, int n);
+char			*ft_strnew(size_t size);
+void    		ft_bzero(void *s, size_t n);
 #endif

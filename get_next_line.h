@@ -19,10 +19,13 @@
 # include <sys/stat.h>
 
 # define BUFF_SIZE	4
+# define check(reg) if (reg == -1) return (-1)
+# define line_helper(line, helper) *line = ft_strdup(helper);free(helper); \
+        return (1)
 
-int		get_node_data_to_line(t_list **t, char **line);
+int		get_node_data(t_list **t, char **helper);
 int		get_next_line(const int fd, char **line);
-int		buf_line(ssize_t *regbyte, char **line, char *buf, t_list **tp);
-int		get_data_helper(t_list **t, char **line, int len);
-void	copy_content_line(char **line, t_list **t, int len);
+int		concat_helper(ssize_t *regbyte, char **line, char *buf, t_list **tp);
+int		get_data_helper(t_list **t, char **helper, int len);
+void	        copy_to_helper(char **line, t_list **t, int len);
 #endif
