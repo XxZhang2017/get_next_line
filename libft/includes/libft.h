@@ -33,4 +33,7 @@ int				ft_search(char *a);
 char			*ft_strndup(char *c, int n);
 char			*ft_strnew(size_t size);
 void    		ft_bzero(void *s, size_t n);
+
+
+void    *ft_memset(void *b, int c, int len);
 #endif
