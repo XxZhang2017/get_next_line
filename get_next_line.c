@@ -91,7 +91,7 @@ int		get_next_line(const int fd, char **line)
 	ssize_t			regbyte;
 	int				reg[2];
 	char			buf[BUFF_SIZE + 1];
-	static t_list	*head[255];
+	static t_list	*head[255] ={NULL};
 
 	reg[1] = -1;
 	if (fd < 0 || line == NULL)

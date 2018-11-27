@@ -13,6 +13,7 @@
 NAME = libft.a
 
 FLAGS = -Wall -Werror -Wextra \
+	-fsanitize=address
 
 FILES = $(shell ls | grep -E "ft_.+\.c")
 

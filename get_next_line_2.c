@@ -48,7 +48,7 @@ void	        copy_to_helper(char **helper, t_list **t, int len)
     char	*h_line;
 
 	h_line = *helper;
-	(*helper) = ft_strnjoin((*helper), (*t)->content, len);
+	(*helper) = ft_strnjoin((*helper), (*t)->content, len + 1);
 	free(h_line);
 	h_line = (*t)->content;
 	if (len + 1 < ft_strlen((*t)->content))
@@ -67,7 +67,7 @@ int		concat_helper(ssize_t *regbyte, char **helper, char *buf, t_list **tp)
 	if (trace != -1)
 	{
 		help_line = *helper;
-		*helper = ft_strnjoin(*helper, buf, trace);
+		*helper = ft_strnjoin(*helper, buf, trace + 1);
 		free(help_line);
 		if (trace + 1 < *regbyte)
 			ft_add_to_tail(buf, trace + 1, tp);
@@ -82,31 +82,26 @@ int		concat_helper(ssize_t *regbyte, char **helper, char *buf, t_list **tp)
 int get_next_line(int fd, char **line)
 {
     char    *helper;
-    static  t_list  *head[4096];  //init list to NULL?
+    static  t_list  *head[4096] = {NULL};  //init list to NULL?
     ssize_t read_buf;
     int     reg;
     char    buf[BUFF_SIZE + 1];
 
     helper = ft_strnew(0);
-    if ((reg == get_node_data(&head[fd], &helper)) == 1)
-        line_helper(line, helper);
+    if ((reg = get_node_data(&head[fd], &helper)) == 1)
+    { line_helper(line, helper);}
     while((read_buf = read(fd, buf, BUFF_SIZE)) != 0)
     {
         check(read_buf);
         buf[read_buf] = '\0';
 		if ((reg = concat_helper(&read_buf, &helper, buf, &head[fd])) == 1)
-			 line_helper(line, helper);
+		{	 line_helper(line, helper);}
     }
-    if (!(*helper) && head[fd])
+    if (!(*helper) && (!head[fd]))
         return (0);
     else
     {  
         helper = ft_strjoin(helper, buf);
         line_helper(line, helper);
     }
-}
-
-int main()
-{
-    return (0);
 }

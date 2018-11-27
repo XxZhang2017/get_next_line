@@ -18,7 +18,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
-# define BUFF_SIZE	4
+# define BUFF_SIZE	100
 # define check(reg) if (reg == -1) return (-1)
 # define line_helper(line, helper) *line = ft_strdup(helper);free(helper); \
         return (1)
