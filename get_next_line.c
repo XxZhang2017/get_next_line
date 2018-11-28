@@ -6,7 +6,7 @@
 /*   By: xinzhang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/04 17:26:10 by xinzhang          #+#    #+#             */
-/*   Updated: 2018/11/25 11:55:35 by xinzhang         ###   ########.fr       */
+/*   Updated: 2018/11/27 23:41:57 by xinzhang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 int		get_node_data(t_list **t, char **helper)
 {
-    t_list	*tmp;
+	t_list	*tmp;
 	char	*help_line;
-    int     len;
+	int		len;
 
-    len = 0;
-	null_return(*t);
-    // if (!(*t))
-	// 	return (-1);
+	len = 0;
+	NULL_RETURN(*t);
 	while (*t && (*t)->content)
 	{
 		while (((*t)->content)[len])
@@ -35,20 +33,15 @@ int		get_node_data(t_list **t, char **helper)
 		}
 		help_line = *helper;
 		(*helper) = ft_strjoin((*helper), (*t)->content);
-		move_l_ptr(tmp, *t, (*t)->next);
-		// tmp = (*t);
-		// (*t) = (*t)->next;
-		free_three(tmp->content, help_line, tmp);
-		// free(tmp->content);
-		// free(help_line);
-		// free(tmp);
+		MOVE_L_PTR(tmp, *t, (*t)->next);
+		FREE_THREE(tmp->content, help_line, tmp);
 	}
 	return (0);
 }
 
-void	        copy_to_helper(char **helper, t_list **t, int len)
+void	copy_to_helper(char **helper, t_list **t, int len)
 {
-    char	*h_line;
+	char	*h_line;
 	t_list	*tmp;
 
 	h_line = *helper;
@@ -62,13 +55,13 @@ void	        copy_to_helper(char **helper, t_list **t, int len)
 		tmp = *t;
 		(*t) = (*t)->next;
 		free(tmp);
-	}	
+	}
 	free(h_line);
 }
 
 int		concat_helper(ssize_t *regbyte, char **helper, char *buf, t_list **tp)
 {
-    int		trace;
+	int		trace;
 	char	*help_line;
 
 	trace = ft_search(buf);
@@ -80,55 +73,44 @@ int		concat_helper(ssize_t *regbyte, char **helper, char *buf, t_list **tp)
 		if (trace + 1 < *regbyte)
 			ft_add_to_tail(buf, trace + 1, tp);
 		return (1);
-	} 
+	}
 	help_line = *helper;
 	*helper = ft_strnjoin(*helper, buf, *regbyte);
 	free(help_line);
 	return (0);
 }
 
-int get_next_line(int fd, char **line)
+int		get_next_line(int fd, char **line)
 {
-    char    *helper;
-    static  t_list  *head[4096] = {NULL};  //init list to NULL?
-    ssize_t read_buf;
-    int     reg;
-    char    buf[BUFF_SIZE + 1];
-	char	*helper_helper;
+	char			*helper;
+	static t_list	*head[4096] = {NULL};
+	ssize_t			read_buf;
+	int				reg;
+	char			buf[BUFF_SIZE + 1];
 
-
-	if (fd < 0 || !line )
+	if (fd < 0 || !line)
 		exit(1);
-    helper = ft_strnew(0);
-    if ((reg = get_node_data(&head[fd], &helper)) == 1)
-    { line_helper(line, helper);}
-    while((read_buf = read(fd, buf, BUFF_SIZE)) != 0)
-    {
-        check(read_buf);
-        buf[read_buf] = '\0';
+	helper = ft_strnew(0);
+	if ((reg = get_node_data(&head[fd], &helper)) == 1)
+	{
+		LINE_HELPER(line, helper);
+	}
+	while ((read_buf = read(fd, buf, BUFF_SIZE)) != 0)
+	{
+		CHECK(read_buf);
+		buf[read_buf] = '\0';
 		if ((reg = concat_helper(&read_buf, &helper, buf, &head[fd])) == 1)
-		{	 line_helper(line, helper);}
-    }
+		{
+			LINE_HELPER(line, helper);
+		}
+	}
 	buf[read_buf] = '\0';
 	return (wrapper(&helper, &head[0], buf, fd));
-    // if (!(*helper) && (!head[fd]))
-	// {
-	// 	if (helper)
-	// 		free(helper);
-	// 	return (0);
-	// }
-    // else
-    // {  
-	// 	helper_helper = helper;
-    //     helper = ft_strjoin(helper, buf);
-	// 	free(helper_helper);
-    //     line_helper(line, helper);
-    // }
 }
 
-int	wrapper(char **hp_line, t_list **head, char *buf, int fd)
+int		wrapper(char **hp_line, t_list **head, char *buf, int fd)
 {
-	char *hp_line_hper;
+	char	*hp_line_hper;
 
 	if (!(**hp_line) && (!(head[fd])))
 	{
@@ -141,7 +123,7 @@ int	wrapper(char **hp_line, t_list **head, char *buf, int fd)
 		hp_line_hper = *hp_line;
 		*hp_line = ft_strjoin(*hp_line, buf);
 		free(hp_line_hper);
-		line_helper(hp_line, hp_line_hper);
+		LINE_HELPER(hp_line, hp_line_hper);
 		return (1);
 	}
 }
