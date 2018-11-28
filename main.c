@@ -13,10 +13,15 @@ int	main(int ac, char **av)
 	fd =open("test1.txt", O_RDONLY);
 	while ((reg_1 = get_next_line(fd, &line)) != 0)
 	{
-//		printf("%s", line);
+		printf("%s", line);
 		free(line);
 	}
-	sleep(10);
+	// if (!line)
+	// 	free(line);
+
+	 while(1)
+	 	;
+//	sleep(20);
 	return (0);
 }	
 
