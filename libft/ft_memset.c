@@ -1,17 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xinzhang <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/28 19:35:27 by xinzhang          #+#    #+#             */
+/*   Updated: 2018/11/28 19:41:13 by xinzhang         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/libft.h"
-// memset have to trust the length that is passed in. 
-// memset needs to work on a general piece of memory, 
-// not just a 0 terminated string - so there should not be such a check.
 
-
-
-void    *ft_memset(void *b, int c, int len)
+void	*ft_memset(void *b, int c, int len)
 {
-    int i;
-    unsigned char   *p = b;
+	int				i;
+	unsigned char	*p;
 
-    i = 0;
-    while(len > 0)
-        p[--len] = c;
-    return(b);
+	p = b;
+	i = 0;
+	while (len > 0)
+		p[--len] = c;
+	return (b);
 }
