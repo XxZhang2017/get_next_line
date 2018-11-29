@@ -18,7 +18,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
-# define BUFF_SIZE	4
+# define BUFF_SIZE	100
 
 int		get_node_data_to_line(t_list **t, char **line);
 int		get_next_line(const int fd, char **line);
